@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - ~/apps/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=hello_django
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+    ports:
+      - 5432:5432
+
+  web:
+    build:
+      context: .
+    command:
+      >
+      bash -c "python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+
+    ports:
+      - 8000:8000
+    volumes:
+      - ./getmeal:/app
+    depends_on:
+      db:
+        condition: service_started
+
+  
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    ports:
+      - "5555:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: unless-stopped
+    

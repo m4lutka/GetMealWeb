@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'getmeal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'ZzlbwthCdxvdlwBFcDmoqKisqFikqrSf',
-        'HOST': 'postgres.railway.internal',
+        'NAME': 'hello_django',
+        'USER': 'hello_django',
+        'PASSWORD': 'hello_django',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
