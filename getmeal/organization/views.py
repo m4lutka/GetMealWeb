@@ -28,7 +28,7 @@ class OrganizationRegistrationView(APIView):
         Organizations.objects.create(
             user=request.user, 
             name=serializer.validated_data["name"], 
-            adress=serializer.validated_data["address"], 
+            address=serializer.validated_data["address"], 
             image=serializer.validated_data["image"]
         )
         
