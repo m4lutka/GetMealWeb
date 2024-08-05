@@ -24,3 +24,18 @@ class NewUserManager(UserManager):
         user.set_password(password)
         user.save(using=self.db)
         return user
+    
+
+class User(AbstractUser):
+    objects = NewUserManager()
+    email = models.EmailField(max_length=255, unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    #phone_number = models.TextField(max_length=10, unique=True, blank=True)
+    phone_number = models.TextField(max_length=10, blank=True)
+    is_organization = models.BooleanField(default=False, blank=True)
+    
+    def __str__(self):
+        return str(self.email)

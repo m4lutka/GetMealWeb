@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:16-alpine
     volumes:
-      - ~/apps/db:/var/lib/postgresql/data
+      - ~/apps/getmeal_db:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=hello_django
+      - POSTGRES_DB=getmeal
       - POSTGRES_USER=hello_django
       - POSTGRES_PASSWORD=hello_django
     ports:
@@ -17,7 +17,8 @@ services:
       context: .
     command:
       >
-      bash -c "python manage.py migrate
+      bash -c "python manage.py makemigrations
+      && python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
 
     ports:
