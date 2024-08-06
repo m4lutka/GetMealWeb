@@ -1,0 +1,14 @@
+{
+  "locofyConfig": {
+    "project": "Test",
+    "id": "66b1034e617e4f227cb16b84",
+    "framework": "react",
+    "typescript": true,
+    "styling": "CSS Modules",
+    "unit": "px",
+    "naming": "Pascal Case",
+    "path": "public/",
+    "componentsPath": "d:\\StartUpProject\\GetMealRegistration\\src\\components",
+    "screensPath": "d:\\StartUpProject\\GetMealRegistration\\src\\pages"
+  }
+}
