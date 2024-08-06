@@ -1,0 +1,634 @@
+.icon {
+  position: absolute;
+  top: -43px;
+  left: -140px;
+  width: 1657px;
+  height: 1135px;
+  display: flex;
+}
+.icon:hover {
+  display: flex;
+  width: 1657px;
+  height: 1135px;
+}
+.layer1Icon {
+  position: absolute;
+  top: 762px;
+  left: 488px;
+  width: 423.1px;
+  height: 161.5px;
+  display: flex;
+  z-index: 1;
+}
+.layer1Icon:hover {
+  display: flex;
+  width: 423.1px;
+  height: 161.5px;
+}
+.window {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  margin: 0 !important;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  display: none;
+}
+.window:hover {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+}
+
+.icon {
+  position: absolute; /* Абсолютное позиционирование относительно родителя (.desktop1) */
+  top: 0;
+  left: 0;
+  width: 100px; /* Укажите нужный размер */
+  height: 100px; /* Укажите нужный размер */
+  z-index: 0; /* Убедитесь, что они под основным контентом */
+}
+
+.layer1Icon {
+  position: absolute; /* Абсолютное позиционирование относительно родителя (.desktop1) */
+  top: 0;
+  left: 0;
+  width: 423.1px;
+  height: 161.5px;
+  z-index: 1; /* Убедитесь, что этот элемент выше .icon */
+}
+
+.registration {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  font-size: var(--font-size-41xl);
+  line-height: 120%;
+  font-weight: 400;
+  font-family: var(--font-adamina);
+  color: var(--color-black);
+  text-align: left;
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+}
+.registration:hover {
+  font-family: var(--font-adamina);
+  font-size: var(--font-size-41xl);
+  line-height: 120%;
+  text-align: left;
+  color: var(--color-black);
+  display: flex;
+  flex: 1;
+  height: auto;
+  max-width: 100%;
+}
+.registrationLabel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 0px 0px var(--padding-3xs);
+  box-sizing: border-box;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  gap: var(--gap-0);
+  transform: rotate(0deg);
+}
+.registrationLabel:hover {
+  display: flex;
+  align-self: stretch;
+  width: auto;
+  height: auto;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  padding: 0px 0px 0px var(--padding-3xs);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.enterYourEmail {
+  width: 348px;
+  position: relative;
+  font-size: var(--font-size-xl);
+  line-height: 137.7%;
+  font-family: var(--font-adamina);
+  color: var(--sub-color);
+  text-align: center;
+  display: flex;
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+}
+.enterYourEmail:hover {
+  font-family: var(--font-adamina);
+  font-size: var(--font-size-xl);
+  line-height: 137.7%;
+  text-align: center;
+  color: var(--sub-color);
+  display: flex;
+  width: 348px;
+  height: auto;
+  max-width: 100%;
+}
+.registrationLabelParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-mid);
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  transform: rotate(0deg);
+}
+.registrationLabelParent:hover {
+  display: flex;
+  align-self: stretch;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  gap: var(--gap-mid);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  max-width: 100%;
+}
+.emailInput {
+  border: 3px solid var(--color-chocolate);
+  background-color: var(--color-white);
+  width: 355px;
+  height: 80px;
+  font-family: var(--font-adamina);
+  font-size: var(--font-size-xl);
+  color: var(--color-gray);
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-7xl) var(--padding-3xs);
+  box-sizing: border-box;
+  z-index: 1;
+}
+.emailInput:hover {
+  background-color: var(--color-white);
+  display: flex;
+  width: 355px;
+  height: 80px;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-7xl) var(--padding-3xs);
+  box-sizing: border-box;
+  border: 3px solid var(--color-chocolate);
+  max-width: 100%;
+  align-items: center;
+}
+.formContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xl);
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  transform: rotate(0deg);
+}
+.formContainer:hover {
+  display: flex;
+  align-self: stretch;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  gap: var(--gap-8xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  max-width: 100%;
+}
+.passwordInput {
+  border: 3px solid var(--color-chocolate);
+  background-color: var(--color-white);
+  align-self: stretch;
+  height: 80px;
+  font-family: var(--font-adamina);
+  font-size: var(--font-size-xl);
+  color: var(--color-gray);
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-12xl) var(--padding-3xs) var(--padding-2xl);
+  box-sizing: border-box;
+  z-index: 1;
+  align-items: center;
+  padding-top: 21px;
+}
+
+.emailInput,
+.passwordInput {
+  display: flex;
+  align-items: center; /* Выравнивание по центру по вертикали */
+  justify-content: flex-start; /* Выравнивание по левому краю по горизонтали */
+  border: 3px solid var(--color-chocolate); /* Сохранение основной рамки */
+  outline: none; /* Удаление тонкой рамки */
+  box-shadow: none; /* Удаление любых теней */
+}
+
+.passwordInput:hover {
+  background-color: var(--color-white);
+  display: flex;
+  align-self: stretch;
+  width: auto;
+  height: 80px;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-12xl) var(--padding-3xs) var(--padding-2xl);
+  box-sizing: border-box;
+  border: 3px solid var(--color-chocolate);
+  align-items: center;
+  padding-top: 21px;
+}
+.submission {
+  color: #fff;
+  height: 64px;
+  flex: 1;
+  background-color: var(--color-chocolate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: var(--gap-0);
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-4xs) var(--padding-45xl) var(--padding-5xs);
+  box-sizing: border-box;
+  border: 3px solid var(--color-chocolate);
+  z-index: 1;
+}
+.submission:hover {
+  background-color: var(--color-cholocate-hover);
+  display: flex;
+  flex: 1;
+  height: 64px;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0deg);
+  border-radius: var(--br-3xs);
+  padding: var(--padding-4xs) var(--padding-45xl) var(--padding-5xs);
+  box-sizing: border-box;
+  border: 3px solid var(--color-cholocate-hover);
+}
+.submitButton {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--padding-21xl) 0px var(--padding-13xl);
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  gap: var(--gap-0);
+  transform: rotate(0deg);
+
+}
+.submitButton:hover {
+  display: flex;
+  align-self: stretch;
+  width: auto;
+  height: auto;
+  flex-direction: row;
+  gap: var(--gap-0);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  padding: 0px var(--padding-21xl) 0px var(--padding-13xl);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.passwordInputParent {
+  width: 355px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xl);
+  max-width: 100%;
+  height: auto;
+  transform: rotate(0deg);
+}
+.passwordInputParent:hover {
+  display: flex;
+  width: 355px;
+  height: auto;
+  flex-direction: column;
+  gap: var(--gap-9xl);
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotate(0deg);
+  max-width: 100%;
+}
+.desktop1 {
+  background-color: var(--color-white);
+  border: 0px solid var(--color-black);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-18xl);
+  line-height: normal;
+  letter-spacing: normal;
+  height: auto;
+  position: absolute; /* Закрепляем элемент относительно экрана */
+  top: 55%; /* Половина высоты экрана */
+  left: 43%; /* Половина ширины экрана */
+  transform: translate(-50%, -50%); /* Сдвигаем элемент на 50% его ширины и высоты для центрирования */
+  width: auto; /* Автоматическая ширина */
+  height: auto; /* Автоматическая высота */
+  background-color: var(--color-white); /* Убедитесь, что фон белый */
+  padding: var(--padding-150xl) var(--padding-244xl) var(--padding-372xl) var(--padding-488xl); /* Установите отступы, если нужно */
+  box-sizing: border-box;
+}
+
+
+.desktopContainer {
+  position: relative;
+  width: 100vw; /* Занимает всю ширину экрана */
+  height: 100vh; /* Занимает всю высоту экрана */
+  overflow: hidden; /* Скрывает части изображений, выходящие за пределы контейнера */
+  box-sizing: border-box;
+}
+
+.logoContainer {
+  position: fixed;
+  bottom: 20px; /* Отступ от низа страницы (увеличиваем, чтобы логотип был выше) */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Стили для логотипа */
+.logo {
+  max-width: 1000px;
+  width: 30%; /* Увеличение размера логотипа */
+  height: auto; /* Сохраняет пропорции */
+}
+
+.circ1,
+.circ2,
+.circ3,
+.circ4,
+.circ5,
+.circ6 {
+  position: fixed; /* Фиксированное позиционирование для кругляшков */
+  width: 181px; /* Установите ширину изображений по вашему усмотрению */
+  height: 181px; /* Установите высоту изображений по вашему усмотрению */
+  background-size: cover; /* Обеспечивает корректное отображение изображений */
+  z-index: 1; /* Помещает изображения позади содержимого */
+}
+
+.circ1 {
+  top: -20px;
+  left: -20px;
+}
+
+.circ2 {
+  top: 50%;
+  left: -40px;
+  transform: translateY(-50%);
+}
+
+.circ3 {
+  bottom: -20px;
+  left: -20px;
+}
+
+.circ4 {
+  top: -20px;
+  right: -20px;
+}
+
+.circ5 {
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+}
+
+.circ6 {
+  bottom: -20px;
+  right: -20px;
+}
+
+@media screen and (max-width: 750px) {
+  .registration {
+    font-size: 48px;
+    line-height: 58px;
+  }
+
+  .desktop1 {
+    gap: 18px;
+    padding-left: 253px;
+    padding-right: 131px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .registration {
+    font-size: 36px;
+    line-height: 43px;
+  }
+
+  .enterYourEmail {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .desktop1 {
+    padding-left: var(--padding-xl);
+    padding-right: var(--padding-xl);
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .emailInput,
+  .passwordInput {
+    font-size: calc(var(--font-size-xl) * 0.9); /* Уменьшение шрифта */
+    padding: calc(var(--padding-7xl) * 0.9) calc(var(--padding-3xs) * 0.9); /* Уменьшение отступов */
+    border-width: 1.5px; /* Уменьшение толщины рамки */
+  }
+
+  .registration,
+  .enterYourEmail{
+    transform: translate(-8%);
+  }
+
+  .submission {
+    font-size: calc(var(--font-size-xl) * 0.9); /* Уменьшение шрифта на кнопке */
+    padding: calc(var(--padding-4xs) * 0.9) calc(var(--padding-45xl) * 0.9) calc(var(--padding-5xs) * 0.9); /* Уменьшение отступов */
+  }
+
+  .logo {
+    width: 30%;
+    max-width: 1000px;
+  }
+
+  .passwordInputParent,
+  .emailInput{
+    width: 320px;
+  }
+
+
+
+  .submitButton {
+    font-size: calc(var(--font-size-xl) * 0.9); /* Уменьшение шрифта */
+    padding: calc(var(--padding-21xl) * 0.9) calc(var(--padding-13xl) * 0.9); /* Уменьшение отступов */
+  }
+  .circ1 { width: 150px; height: 150px; }
+  .circ2 { width: 150px; height: 150px; }
+  .circ3 { width: 150px; height: 150px; }
+  .circ4 { width: 150px; height: 150px; }
+  .circ5 { width: 150px; height: 150px; }
+  .circ6 { width: 150px; height: 150px; }
+}
+
+@media screen and (max-width: 992px) {
+  .emailInput,
+  .passwordInput {
+    font-size: calc(var(--font-size-xl) * 0.8); /* Уменьшение шрифта */
+    padding: calc(var(--padding-7xl) * 0.8) calc(var(--padding-3xs) * 0.8); /* Уменьшение отступов */
+    border-width: 1.5px;
+  }
+
+  .submission {
+    font-size: calc(var(--font-size-xl) * 0.8); /* Уменьшение шрифта на кнопке */
+    padding: calc(var(--padding-4xs) * 0.8) calc(var(--padding-45xl) * 0.8) calc(var(--padding-5xs) * 0.8); /* Уменьшение отступов */
+  }
+
+  .passwordInputParent,
+  .emailInput{
+    width: 280px;
+  }
+
+  .submitButton {
+    font-size: calc(var(--font-size-xl) * 0.8); /* Уменьшение шрифта */
+    padding: calc(var(--padding-21xl) * 0.8) calc(var(--padding-13xl) * 0.8); /* Уменьшение отступов */
+  }
+  .circ1 { width: 120px; height: 120px; }
+  .circ2 { width: 120px; height: 120px; }
+  .circ3 { width: 120px; height: 120px; }
+  .circ4 { width: 120px; height: 120px; }
+  .circ5 { width: 120px; height: 120px; }
+  .circ6 { width: 120px; height: 120px; }
+}
+
+@media screen and (max-width: 750px) {
+  .emailInput,
+  .passwordInput {
+    font-size: calc(var(--font-size-xl) * 0.7); /* Уменьшение шрифта */
+    padding: calc(var(--padding-7xl) * 0.7) calc(var(--padding-3xs) * 0.7); /* Уменьшение отступов */
+  }
+
+  .registration{
+    transform: translate(-5%)
+  }
+
+  .enterYourEmail{
+    transform: translate(-10%);
+  }
+
+  .submission {
+    font-size: calc(var(--font-size-xl) * 0.7); /* Уменьшение шрифта на кнопке */
+    padding: calc(var(--padding-4xs) * 0.7) calc(var(--padding-45xl) * 0.7) calc(var(--padding-5xs) * 0.7); /* Уменьшение отступов */
+  }
+
+  .submitButton {
+    font-size: calc(var(--font-size-xl) * 0.7); /* Уменьшение шрифта */
+    padding: calc(var(--padding-21xl) * 0.7) calc(var(--padding-13xl) * 0.7); /* Уменьшение отступов */
+  }
+  .circ1 { width: 100px; height: 100px; }
+  .circ2 { width: 100px; height: 100px; }
+  .circ3 { width: 100px; height: 100px; }
+  .circ4 { width: 100px; height: 100px; }
+  .circ5 { width: 100px; height: 100px; }
+  .circ6 { width: 100px; height: 100px; }
+}
+
+@media screen and (max-width: 450px) {
+
+  .emailInput,
+  .passwordInput {
+    font-size: calc(var(--font-size-xl) * 0.6); /* Уменьшение шрифта */
+    padding: calc(var(--padding-7xl) * 0.6) calc(var(--padding-3xs) * 0.6); /* Уменьшение отступов */
+
+  }
+
+  .registration{
+    transform: translate(30%);
+  }
+
+  .enterYourEmail{
+    transform: translate(10%);
+  }
+
+  .submission {
+    font-size: calc(var(--font-size-xl) * 0.6); /* Уменьшение шрифта на кнопке */
+    padding: calc(var(--padding-4xs) * 0.6) calc(var(--padding-45xl) * 0.6) calc(var(--padding-5xs) * 0.6); /* Уменьшение отступов */
+  }
+
+  .passwordInputParent,
+  .emailInput{
+    width: 240px;
+    transform: translate(35%);
+  }
+
+  .submitButton {
+    font-size: calc(var(--font-size-xl) * 0.6); /* Уменьшение шрифта */
+    padding: calc(var(--padding-21xl) * 0.6) calc(var(--padding-13xl) * 0.6); /* Уменьшение отступов */
+  }
+  .circ1 { width: 80px; height: 80px; }
+  .circ2 { width: 80px; height: 80px; }
+  .circ3 { width: 80px; height: 80px; }
+  .circ4 { width: 80px; height: 80px; }
+  .circ5 { width: 80px; height: 80px; }
+  .circ6 { width: 80px; height: 80px; }
+}
