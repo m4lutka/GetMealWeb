@@ -174,7 +174,7 @@
 .emailInput {
   border: 3px solid var(--color-chocolate);
   background-color: var(--color-white);
-  width: 355px;
+
   height: 80px;
   font-family: var(--font-adamina);
   font-size: var(--font-size-xl);

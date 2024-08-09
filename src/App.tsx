@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect } from "react";
 import {
   Routes,
@@ -19,13 +20,13 @@ function App() {
   }, [action, pathname]);
 
   useEffect(() => {
-    let title = "Default Title";
-    let metaDescription = "Default description";
+    let title = "GetMeal Registration";
+    let metaDescription = "GetMeal Registration";
 
     switch (pathname) {
       case "/":
-        title = "Home Page";
-        metaDescription = "This is the home page.";
+        title = "GetMeal";
+        metaDescription = "Getmeal";
         break;
       default:
         break;

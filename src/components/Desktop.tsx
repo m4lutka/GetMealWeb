@@ -1,3 +1,4 @@
+import React from "react";
 import { FunctionComponent } from "react";
 import {
   TextField,
@@ -7,13 +8,13 @@ import {
   Button,
 } from "@mui/material";
 import styles from "./Desktop.module.css";
-import Circ1 from "../Pics/Circ1.svg";
-import Circ2 from "../Pics/Circ2.svg";
-import Circ3 from "../Pics/Circ3.svg";
-import Circ4 from "../Pics/Circ4.svg";
-import Circ5 from "../Pics/Circ5.svg";
-import Circ6 from "../Pics/Circ6.svg";
-import Logo from "../Pics/Logo.svg";
+import Circ1 from "../assets/Pics/Circ1.svg";
+import Circ2 from "../assets/Pics/Circ2.svg";
+import Circ3 from "../assets/Pics/Circ3.svg";
+import Circ4 from "../assets/Pics/Circ4.svg";
+import Circ5 from "../assets/Pics/Circ5.svg";
+import Circ6 from "../assets/Pics/Circ6.svg";
+import Logo from "../assets/Pics/Logo.svg";
 export type DesktopType = {
   className?: string;
 };
@@ -60,8 +61,9 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
                 backgroundColor: "#fff",
                 borderRadius: "10px",
                 fontSize: "20px",
+                width: "auto",
               },
-              "& .MuiInputBase-input": { color: "rgba(0, 0, 0, 0.3)" },
+              "& .MuiInputBase-input": { color: "rgba(0, 0, 0, 0.5)" },
               width: "355px",
             }}
           />
@@ -70,6 +72,7 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
           <TextField
             className={styles.passwordInput}
             placeholder="Your Password"
+            type="password"
             variant="outlined"
             sx={{
               "& fieldset": { display: "none" },
