@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { FunctionComponent } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   InputAdornment,
@@ -15,14 +17,45 @@ import Circ4 from "../assets/Pics/Circ4.svg";
 import Circ5 from "../assets/Pics/Circ5.svg";
 import Circ6 from "../assets/Pics/Circ6.svg";
 import Logo from "../assets/Pics/Logo.svg";
+import AuthService from "../auth/AuthService";
+
 export type DesktopType = {
   className?: string;
 };
 
 const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // Регистрация
+      const registerResponse = await AuthService.register(email, password);
+      console.log('Registration successful:', registerResponse);
+
+      // Логин
+      const loginResponse = await AuthService.login(email, password);
+      console.log('Login successful:', loginResponse);
+
+      // Сохранение токенов
+      localStorage.setItem('accessToken', loginResponse.access);
+      localStorage.setItem('refreshToken', loginResponse.refresh);
+
+      // Установка заголовков авторизации
+      AuthService.setAuthHeader(loginResponse.access);
+
+      // Перенаправление на защищенную страницу
+      navigate("/main");
+    } catch (error) {
+      console.error("Registration or login failed:", error);
+      console.log("something went wrong");
+    }
+  };
   return (
     <div className={styles.desktopContainer}>
-      {/* Добавляем все изображения */}
       <img className={`${styles.circ1}`} alt="Circle 1" src={Circ1} />
       <img className={`${styles.circ2}`} alt="Circle 2" src={Circ2} />
       <img className={`${styles.circ3}`} alt="Circle 3" src={Circ3} />
@@ -53,6 +86,8 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
             className={styles.emailInput}
             placeholder="Your Email"
             variant="outlined"
+            value={email} // Привязываем к состоянию
+            onChange={(e) => setEmail(e.target.value)}
             sx={{
               "& fieldset": { display: "none" },
               "& .MuiInputBase-root": {
@@ -74,6 +109,8 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
             placeholder="Your Password"
             type="password"
             variant="outlined"
+            value={password} // Привязываем к состоянию
+            onChange={(e) => setPassword(e.target.value)} // Обновляем состояние
             sx={{
               "& fieldset": { display: "none" },
               "& .MuiInputBase-root": {
@@ -105,6 +142,8 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
                 justifyContent: "center",
                 margin: "0 auto"
               }}
+
+              onClick={handleSubmit}
             >
               Submit
             </Button>

@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import Desktop from "./components/Desktop"; // Убедитесь, что импорт правильный
+import Main from "./pages/main/Main";
 
 function App() {
   const action = useNavigationType();
@@ -48,6 +49,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Desktop />} /> {/* Используйте компонент Desktop */}
+      <Route path="/main" element={<Main />} />
     </Routes>
   );
 }
