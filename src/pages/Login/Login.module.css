@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  height: 100vh;
+  margin-top: 400px;
+}
+
+.buttonWrapper {
+  font-family: var(--font-adamina);
+  margin-top: 40px;
+}

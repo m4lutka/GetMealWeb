@@ -1,15 +1,15 @@
 // src/auth/AuthService.ts
 import axios from "axios";
-import { RegisterResponse, LoginResponse } from "./types";
 
-const API_URL = "/api/user/"; // URL вашего API
+const API_URL = "https://getmeal-production.up.railway.app/api/user/";
 
 class AuthService {
-    async register(email: string, password: string) {
+    async register(email: string, password: string, isOrganization: boolean) {
       try {
         const response = await axios.post(`${API_URL}registration/`, {
           email,
           password,
+          is_organization: isOrganization,
         });
         return response.data;
       } catch (error) {
@@ -17,6 +17,7 @@ class AuthService {
         throw error;
       }
     }
+
 
     async login(email: string, password: string) {
       try {
@@ -27,6 +28,21 @@ class AuthService {
         return response.data;
       } catch (error) {
         console.error('Error during login:', error);
+        throw error;
+      }
+    }
+
+    async getUser(isOrganization: boolean) {
+      try {
+        // Отправляем запрос на сервер с параметром is_organization
+        const response = await axios.get(`${API_URL}`, {
+          params: {
+            is_organization: isOrganization,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
         throw error;
       }
     }

@@ -348,7 +348,7 @@
   width: 355px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   gap: var(--gap-9xl);
   max-width: 100%;
@@ -361,11 +361,20 @@
   height: auto;
   flex-direction: column;
   gap: var(--gap-9xl);
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   transform: rotate(0deg);
   max-width: 100%;
 }
+
+.Checkboxico{
+  margin-left: -20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .desktop1 {
   background-color: var(--color-white);
   border: 0px solid var(--color-black);
@@ -419,11 +428,11 @@
 .circ4,
 .circ5,
 .circ6 {
-  position: fixed; /* Фиксированное позиционирование для кругляшков */
-  width: 181px; /* Установите ширину изображений по вашему усмотрению */
-  height: 181px; /* Установите высоту изображений по вашему усмотрению */
-  background-size: cover; /* Обеспечивает корректное отображение изображений */
-  z-index: 1; /* Помещает изображения позади содержимого */
+  position: fixed;
+  width: 181px;
+  height: 181px;
+  background-size: cover;
+  z-index: 1;
 }
 
 .circ1 {
