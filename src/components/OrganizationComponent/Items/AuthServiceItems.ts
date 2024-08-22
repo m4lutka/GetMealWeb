@@ -264,40 +264,36 @@ class AuthService {
     }
   }
 
-  async getMenus(): Promise<{ id: number; name: string; description: string }[]> {
+  async getAllMenus(): Promise<{ id: number; name: string }[]> {
     try {
       const token = this.getToken();
       if (!token) {
         throw new Error('No token found');
       }
 
-      const response = await axios.get(`${API_URL_ORG}menu/`, {
+      const response = await axios.get<{ id: number; name: string }[]>(`${API_URL_ORG}menu/`, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
-      return response.data;
+
+      return response.data.map(menu => ({
+        id: menu.id,
+        name: menu.name
+      }));
     } catch (error) {
       console.error('Error fetching menus:', error);
       throw error;
     }
   }
 
-  async getCategories(): Promise<{ id: number; name: string }[]> {
+  async getCategories(selectedMenuIds: number[]): Promise<{ id: number; name: string }[]> {
     try {
       const token = this.getToken();
       if (!token) {
         throw new Error('No token found');
       }
 
-      // 1. Получаем список всех меню для организации
-      const menusResponse = await axios.get<{ id: number }[]>(`${API_URL_ORG}menu/`, {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-
-      // 2. Извлекаем идентификаторы меню
-      const menuIds: number[] = menusResponse.data.map((menu) => menu.id);
-
-      // 3. Получаем категории для каждого меню
-      const categoriesPromises = menuIds.map(async (menuId: number) => {
+      // Получаем категории для каждого выбранного меню
+      const categoriesPromises = selectedMenuIds.map(async (menuId: number) => {
         const response = await axios.get<{ id: number; name: string }[]>(`${API_URL_ORG}menu/category/${menuId}`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
@@ -348,15 +344,20 @@ class AuthService {
       }
     }
 
-    async createItem(itemData: { name: string; description: string; categoryId: number[]; ingredients: string[] }) {
+    async createItem(itemData: FormData): Promise<any> {
       try {
         const token = this.getToken();
         if (!token) {
           throw new Error('No token found');
         }
 
-        const response = await axios.post(`${API_URL_ORG}menu/item/create`, itemData);
-        console.log('Response from server:', response.data);
+        const response = await axios.post(`${API_URL_ORG}menu/item/create`, itemData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            // 'Content-Type': 'multipart/form-data',
+          },
+        });
+
         return response.data;
       } catch (error) {
         console.error('Error creating item:', error);

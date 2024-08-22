@@ -32,7 +32,7 @@ const DrawerPanel: React.FC<DrawerPanelProps> = ({ children }) => {
   const isDashboardSelected = location.pathname.includes('/Dashboard');
   const isRestaurantsSelected = location.pathname.includes('/Restaurants');
   const isMenusSelected = location.pathname.includes('/Menus');
-  const isItemsSelected = location.pathname.includes('/ItemsTemp');
+  const isItemsSelected = location.pathname.includes('/Items');
 
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const DrawerPanel: React.FC<DrawerPanelProps> = ({ children }) => {
 
   const handleItemsClick = () => {
     if(!isItemsSelected) {
-      navigate('/organization/ItemsTemp')
+      navigate('/organization/Items')
     }
   }
 

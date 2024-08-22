@@ -131,25 +131,33 @@ const StepperItem: React.FC = () => {
   useEffect(() => {
     const fetchMenus = async () => {
       try {
-        const data = await AuthService.getMenus(); // Измените путь, если нужно
-        setMenus(data);
+        const menus = await AuthService.getAllMenus(); // Замените на метод получения всех меню
+        setMenus(menus);
       } catch (error) {
         console.error('Error fetching menus:', error);
       }
     };
 
+    fetchMenus();
+  }, []);
+
+  useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const data = await AuthService.getCategories(); // Измените путь, если нужно
-        setCategories(data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
+      if (selectedMenus.size > 0) {
+        try {
+          const menuIds = Array.from(selectedMenus);
+          const categories = await AuthService.getCategories(menuIds);
+          setCategories(categories);
+        } catch (error) {
+          console.error('Error fetching categories:', error);
+        }
+      } else {
+        setCategories([]);
       }
     };
 
-    fetchMenus();
     fetchCategories();
-  }, []);
+  }, [selectedMenus]);
 
   const handleNext = async () => {
     if (activeStep === 0) {
@@ -191,26 +199,40 @@ const StepperItem: React.FC = () => {
     if (activeStep === steps.length - 1) {
       setLoading(true);
       try {
-        const composition = itemIngredients.split(',').map(ingredient => ingredient.trim());
+        const ingredients = itemIngredients.split(',').map(ingredient => ingredient.trim());
 
-        const newItem = {
-          name: itemName,
-          description: itemDescription,
-          categoryId: Array.from(selectedCategories),
-          ingredients: composition,
-          price: Number(itemPrice), // Убедитесь, что цена передается как число
-          discount: 0, // Убедитесь, что у вас есть значение по умолчанию для скидки
-          image: image ? URL.createObjectURL(image) : null, // Преобразуйте изображение в строку, если это нужно
-          menu: Array.from(selectedMenus),
-          additional_option: [] // Пустой массив
-        };
+        const formData = new FormData();
+        formData.append('name', itemName);
+        formData.append('description', itemDescription);
+        formData.append('composition', JSON.stringify(ingredients));
+        formData.append('price', String(itemPrice));
+        formData.append('discount', '0');
+        formData.append('menu', JSON.stringify(Array.from(selectedMenus)));
+        formData.append('category', JSON.stringify(Array.from(selectedCategories)));
+        formData.append('additional_option', JSON.stringify([]));
 
-        console.log('Creating item with data:', newItem); // Лог данных перед созданием
+        if (image) {
+          formData.append('image', image); // Убедитесь, что image - это объект File
+        }
 
-        await AuthService.createItem(newItem);
+        console.log(image); // Должно быть File, а не массив
+        console.log(image instanceof File); // Должно быть true
 
+        // Логируем содержимое FormData
+        formData.forEach((value, key) => {
+          if (key === 'image') {
+            console.log(`${key}:`, value); // Должно быть File
+          } else {
+            console.log(`${key}: ${value}`);
+          }
+        });
+
+        const response = await AuthService.createItem(formData);
+
+        console.log('Response:', response);
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       } catch (error) {
+        console.error('Failed to create item:', error);
         setErrorMessage('Failed to create item.');
         setErrorOpen(true);
       } finally {
@@ -220,7 +242,6 @@ const StepperItem: React.FC = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
-
   const handleBack = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   const handleReset = () => setActiveStep(0);
@@ -296,8 +317,12 @@ const StepperItem: React.FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-                  <UploadImage
-                    ref={uploadImageRef} onImageUpload={setImage}
+                <UploadImage
+                    ref={uploadImageRef}
+                    onImageUpload={(file) => {
+                      console.log('Uploaded file:', file);
+                      setImage(file);
+                    }}
                   />
                 </Box>
               </Grid>

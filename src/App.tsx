@@ -73,7 +73,7 @@ function App() {
       <Route path="/organization/Restaurants" element={<Restaurants />} />
       <Route path="/organization/Restaurants/NewRestaurant" element={<NewRestaurant />} />
       <Route path="/organization/Menus" element={<Menus />} />
-      <Route path="/organization/ItemsTemp" element={<ItemsTemp />} />
+      <Route path="/organization/Items" element={<Items />} />
     </Routes>
     </>
   );
