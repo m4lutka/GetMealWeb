@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { FunctionComponent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   TextField,
   InputAdornment,
@@ -17,9 +17,11 @@ export type DesktopType = {
 
 const Logo: FunctionComponent<DesktopType> = ({ className = "" }) => {
   return (
+    <Link to="/main">
     <div className={styles.logoContainer}>
         <img className={styles.logo} alt="Logo" src={LogoIco} />
       </div>
+    </Link>
   );
 };
 

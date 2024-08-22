@@ -8,7 +8,9 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
+  TextFieldProps,
 } from "@mui/material";
+import { OutlinedInputProps } from '@mui/material/OutlinedInput';
 import styles from "./Desktop.module.css";
 import Circ1 from "../assets/Pics/Circ1.svg";
 import Circ2 from "../assets/Pics/Circ2.svg";
@@ -22,6 +24,37 @@ import Slide, { SlideProps } from '@mui/material/Slide';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import PeopleIcon from '@mui/icons-material/People';
+import { useAuth } from '../context/AuthContext';
+import { alpha, styled } from '@mui/material/styles';
+
+const AnimatedTextField = styled((props: TextFieldProps) => (
+  <TextField
+    InputProps={{ disableUnderline: true } as Partial<OutlinedInputProps>}
+    {...props}
+  />
+))(({ theme }) => ({
+  '& .MuiFilledInput-root': {
+    overflow: 'hidden',
+    borderRadius: 10,
+    backgroundColor: theme.palette.mode === 'light' ? '#Fff' : '#1A2027',
+    border: '2px solid',
+    borderColor: '#e96e0e',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    '&:hover': {
+      backgroundColor: 'transparent',
+      borderColor: '#d76005',
+    },
+    '&.Mui-focused': {
+      backgroundColor: 'transparent',
+      boxShadow: `${alpha('#d76005', 0.25)} 0 0 0 3px`,
+      borderColor: '#d76005',
+    },
+  },
+}));
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -35,8 +68,8 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
   const navigate = useNavigate();
   const [openSnackbar, setOpenSnackbar] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const { login } = useAuth();
 
-  const [isOrganization, setIsOrganization] = useState(false);
 
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
@@ -48,15 +81,8 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
     setOpenSnackbar(false);
   };
 
-  const handleOrganizationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-    setIsOrganization(checked);
 
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (!emailRegex.test(email)) {
       setErrorMessage("Invalid email");
       setOpenSnackbar(true);
@@ -64,9 +90,9 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
     }
 
     try {
-      const registerResponse = await AuthService.register(email, password, isOrganization);
+      const registerResponse = await AuthService.register(email, password);
       console.log('Registration successful:', registerResponse);
-
+      login();
       navigate("/main");
     } catch (error: any) {
       console.error("Registration or login failed:", error);
@@ -79,6 +105,13 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <div className={styles.desktopContainer}>
       <img className={`${styles.circ1}`} alt="Circle 1" src={Circ1} />
@@ -88,7 +121,7 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
       <img className={`${styles.circ5}`} alt="Circle 5" src={Circ5} />
       <img className={`${styles.circ6}`} alt="Circle 6" src={Circ6} />
 
-      <form className={`${styles.desktop1} ${className}`}>
+      <form className={`${styles.desktop1} ${className}`} style={{ marginLeft: '20px' }}>
         <div className={styles.window}>
           <img className={styles.icon} alt="" src="" />
           <img
@@ -101,61 +134,53 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
         <div className={styles.formContainer}>
           <div className={styles.registrationLabelParent}>
             <div className={styles.registrationLabel}>
-              <h1 className={styles.registration}>Registration</h1>
+              <h1 className={styles.registration} style={{fontSize: "60px" }}>Registration</h1>
             </div>
             <div className={styles.enterYourEmail}>
               Enter your email address and password to create account
             </div>
           </div>
-          <TextField
-            className={styles.emailInput}
-            placeholder="Your Email"
-            variant="outlined"
+          <AnimatedTextField
+            label="Your Email"
+            variant="filled"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              "& fieldset": { display: "none" },
-              "& .MuiInputBase-root": {
-                border: "none",
-                height: "10px",
-                backgroundColor: "#fff",
-                borderRadius: "10px",
-                fontSize: "20px",
-                width: "355px",
+            onKeyDown={handleKeyDown}
+            sx={{ marginTop: 0.5, width: "355px" }}
+            InputLabelProps={{
+              sx: {
+                color: 'black',
+                opacity: "50%",
+                '&.Mui-focused': {
+                  color: '#000',
+                },
               },
-              "& .MuiInputBase-input": { color: "rgba(0, 0, 0, 0.5)" },
-              width: "355px",
             }}
           />
-        </div>
-        <div className={styles.passwordInputParent}>
-          <TextField
-            className={styles.passwordInput}
-            placeholder="Your Password"
+          <AnimatedTextField
+            label="Your Password"
             type="password"
-            variant="outlined"
+            variant="filled"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              "& fieldset": { display: "none" },
-              "& .MuiInputBase-root": {
-                border: "none",
-                height: "10px",
-                backgroundColor: "#fff",
-                borderRadius: "10px",
-                fontSize: "20px",
+            onKeyDown={handleKeyDown}
+            sx={{ marginTop: -2, width: "355px" }}
+            InputLabelProps={{
+              sx: {
+                color: 'black',
+                opacity: "50%",
+                '&.Mui-focused': {
+                  color: '#000',
+                },
               },
-              "& .MuiInputBase-input": { color: "rgba(0, 0, 0, 0.3)" },
             }}
           />
-          <div className={styles.Checkboxico}>
+          {/* <div className={styles.Checkboxico}>
             <FormControlLabel
               control={
                 <Checkbox
                   icon={<PeopleIcon fontSize="large" />}
                   checkedIcon={<PeopleIcon fontSize="large" />}
-                  checked={isOrganization}
-                  onChange={handleOrganizationChange}
                 />
               }
               label="Organization?"
@@ -167,7 +192,7 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
                 },
               }}
             />
-          </div>
+          </div> */}
 
           <div className={styles.submitButton}>
             <Button
@@ -194,7 +219,7 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
               Submit
             </Button>
           </div>
-          <Typography variant="body2" align="center" sx={{ mt: -1, ml: -1}}>
+          <Typography variant="body2" align="center" sx={{ mt: -1, ml: 12}}>
             <Link component={RouterLink} to="/login" color="primary" underline="hover" sx={{ color: "#e96e0e", fontSize: "17px", "&:hover": { color: "#d6892b" } }}>
               Already signed up?
             </Link>
@@ -207,9 +232,11 @@ const Desktop: FunctionComponent<DesktopType> = ({ className = "" }) => {
           {errorMessage}
         </Alert>
       </Snackbar>
-      <div className={styles.logoContainer}>
-        <img className={styles.logo} alt="Logo" src={Logo} />
-      </div>
+      <Link component={RouterLink} to="/main">
+        <div className={styles.logoContainer}>
+          <img className={styles.logo} alt="Logo" src={Logo} />
+        </div>
+      </Link>
     </div>
   );
 };

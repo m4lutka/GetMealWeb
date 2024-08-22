@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
+    "@mui/x-date-pickers": "^7.13.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +17,11 @@
     "@types/react-dom": "^18.0.11",
     "axios": "^1.7.3",
     "cors": "^2.8.5",
+    "dayjs": "^1.11.12",
+    "js-cookie": "^3.0.5",
+    "jspdf": "^2.5.1",
+    "qrcode": "^1.5.4",
+    "qrcode-generator": "^1.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.2.1",
@@ -43,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/jspdf": "^2.0.0",
+    "@types/qrcode": "^1.5.5"
   }
 }

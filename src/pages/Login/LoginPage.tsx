@@ -19,6 +19,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { TransitionProps } from '@mui/material/transitions';
 import Slide, { SlideProps } from '@mui/material/Slide';
+import { useAuth } from '../../context/AuthContext';
 
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="down" />;
@@ -62,9 +63,11 @@ const RedditTextField = styled((props: TextFieldProps) => (
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [errorOpen, setErrorOpen] = useState(false);
+    const { login } = useAuth();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
+    const handleSubmit = async () => {
+
+      login();
 
     try {
 
@@ -74,12 +77,19 @@ const RedditTextField = styled((props: TextFieldProps) => (
       localStorage.setItem('accessToken', loginResponse.access);
       localStorage.setItem('refreshToken', loginResponse.refresh);
 
-      AuthService.setAuthHeader(loginResponse.access);
+
 
       navigate("/main");
     } catch (error) {
       console.error("Registration or login failed:", error);
       setErrorOpen(true);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit();
     }
   };
 
@@ -104,12 +114,13 @@ const RedditTextField = styled((props: TextFieldProps) => (
         Please login into your account to continue.
       </Typography>
       <RedditTextField
-        label="Enter your login"
+        label="Enter your email"
         id="reddit-input"
         variant="filled"
         color="info"
         value = {email}
         onChange={(e) => setEmail(e.target.value)}
+        onKeyDown={handleKeyDown}
         style={{ marginTop: 11, width: "355px"}}
         InputLabelProps={{
             sx: {
@@ -128,6 +139,7 @@ const RedditTextField = styled((props: TextFieldProps) => (
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        onKeyDown={handleKeyDown}
         color="info"
         style={{ marginTop: 11, width:"355px"}}
         InputLabelProps={{

@@ -1,20 +1,29 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import { SxProps } from '@mui/system';
-import styles from "../styles/global.css"
 
 interface TextFieldComponentProps {
   placeholder: string;
   type?: string;
   sx?: SxProps;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;  // Добавляем onChange
 }
 
-const TextFieldComponent: React.FC<TextFieldComponentProps> = ({ placeholder, type = 'text', sx }) => {
+const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
+  placeholder,
+  type = 'text',
+  sx,
+  value,
+  onChange
+}) => {
   return (
     <TextField
-    label={placeholder}
+      label={placeholder}
       type={type}
       variant="outlined"
+      value={value}
+      onChange={onChange}
       sx={{
         "& .MuiOutlinedInput-root": {
           "& fieldset": {

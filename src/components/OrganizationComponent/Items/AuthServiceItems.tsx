@@ -281,20 +281,37 @@ class AuthService {
     }
   }
 
-  async getCategories(menuId: number): Promise<{ id: number; name: string }[]> {
+  async getCategories(): Promise<{ id: number; name: string }[]> {
     try {
       const token = this.getToken();
       if (!token) {
         throw new Error('No token found');
       }
 
-      const response = await axios.get(`${API_URL_ORG}menu/category/${menuId}`, {
+      // 1. Получаем список всех меню для организации
+      const menusResponse = await axios.get<{ id: number }[]>(`${API_URL_ORG}menu/`, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
-      return response.data.map((category: { id: number; name: string }) => ({
-        id: category.id,
-        name: category.name
-      }));
+
+      // 2. Извлекаем идентификаторы меню
+      const menuIds: number[] = menusResponse.data.map((menu) => menu.id);
+
+      // 3. Получаем категории для каждого меню
+      const categoriesPromises = menuIds.map(async (menuId: number) => {
+        const response = await axios.get<{ id: number; name: string }[]>(`${API_URL_ORG}menu/category/${menuId}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+        return response.data.map((category) => ({
+          id: category.id,
+          name: category.name
+        }));
+      });
+
+      // Собираем все категории
+      const categoriesArrays = await Promise.all(categoriesPromises);
+      const allCategories = categoriesArrays.flat();
+
+      return allCategories;
     } catch (error) {
       console.error('Error fetching categories:', error);
       throw error;
@@ -330,6 +347,42 @@ class AuthService {
         throw error;
       }
     }
+
+    async createItem(itemData: { name: string; description: string; categoryId: number[]; ingredients: string[] }) {
+      try {
+        const token = this.getToken();
+        if (!token) {
+          throw new Error('No token found');
+        }
+
+        const response = await axios.post(`${API_URL_ORG}menu/item/create`, itemData);
+        console.log('Response from server:', response.data);
+        return response.data;
+      } catch (error) {
+        console.error('Error creating item:', error);
+        throw error;
+      }
+    }
+
+    async checkItemNameUnique(itemName: string): Promise<boolean> {
+      try {
+        const token = this.getToken();
+        if (!token) {
+          throw new Error('No token found');
+        }
+
+        const response = await axios.get(`${API_URL_ORG}menu/item/check-name`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+          params: { name: itemName }
+        });
+
+        return response.data.exists;
+      } catch (error) {
+        console.error('Error checking item name uniqueness:', error);
+        throw error;
+      }
+    }
+
 
   }
 

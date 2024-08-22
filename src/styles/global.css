@@ -28,7 +28,7 @@ html, body {
 
 :root {
   /* fonts */
-  --font-adamina: Adamina;
+  --font-adamina: 'Adamina';
 
   /* font sizes */
   --font-size-xl: 20px;
